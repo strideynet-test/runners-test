@@ -2,7 +2,7 @@ name: ci
 on:
   push:
 jobs:
-  build:
+  run:
     runs-on: self-hosted
     strategy:
       matrix:
@@ -15,4 +15,17 @@ jobs:
         with:
           go-version: ${{ matrix.go }}
       - run: go run main.go
-
+  build:
+    runs-on: self-hosted
+    name: builds
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.16
+      - run: go build main.go -o main
+      - uses: actions/upload-artifact@v2
+        with:
+          name: test
+          path: ./main
