@@ -33,3 +33,15 @@ jobs:
         with:
           name: test
           path: ./main
+  build-docker-image:
+    runs-on: self-hosted
+    name: builds docker image
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          context: .
+          tags: ghcr.io/strideynet-test/runners-test/ci:${{ github.sha }}
+          file: Dockerfile.ci
