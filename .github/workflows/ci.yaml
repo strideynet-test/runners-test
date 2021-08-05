@@ -20,8 +20,8 @@ jobs:
     name: builds
     steps:
       - uses: actions/checkout@v2
-      - name: Setup go
-        uses: actions/setup-ruby@v1
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
         with:
           ruby-version: 2.6
       - name: Setup go
